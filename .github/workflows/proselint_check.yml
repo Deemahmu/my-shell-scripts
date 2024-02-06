@@ -1,0 +1,22 @@
+name: Proselint Check
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md' # Trigger only when .md files are modified
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install proselint
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y proselint
+
+    - name: Run proselint
+      run: proselint ./*.md
